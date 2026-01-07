@@ -5,6 +5,7 @@ const gates = [
   { id: "story", label: "STORY", color: "purple" },
   { id: "skills", label: "SKILLS", color: "green" },
   { id: "projects", label: "PROJECTS", color: "blue" },
+  { id: "learn", label: "LEARN HOW TO BE A DEVELOPER", color: "teal" },
   { id: "status", label: "CURRENT STATUS", color: "red" },
   { id: "contact", label: "CONTACT", color: "gold" },
 ];
@@ -76,7 +77,7 @@ export default function Gates({ onGateClick }) {
 
           {/* Icon placeholder */}
           <div className="gate-icon">
-            {["👤", "⚙️", "🎯", "📊", "✉️"][index]}
+            {["👤", "⚙️", "🎯", "🎓", "📊", "✉️"][index]}
           </div>
 
           {/* Label */}

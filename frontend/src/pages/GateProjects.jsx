@@ -1,26 +1,10 @@
 import { motion } from "framer-motion";
 import GateOpening from "../components/GateOpening";
 import "../styles/gate-page.css";
+import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
 
 export default function GateProjects({ onBack }) {
-  const projects = [
-    {
-      name: "Portfolio Website",
-      desc: "Interactive 3D portfolio with storytelling",
-      tech: "React, Three.js, Framer Motion",
-    },
-    {
-      name: "E-commerce Platform",
-      desc: "Full-stack shopping experience",
-      tech: "MERN Stack",
-    },
-    {
-      name: "Task Manager App",
-      desc: "Collaborative task management tool",
-      tech: "React, Firebase",
-    },
-  ];
-
   return (
     <GateOpening color="blue">
       <motion.div
@@ -48,23 +32,94 @@ export default function GateProjects({ onBack }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            {projects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                className="project-card"
-                initial={{ x: -30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.8 + idx * 0.15 }}
-                whileHover={{ x: 10 }}
-              >
-                <h3>{project.name}</h3>
-                <p className="desc">{project.desc}</p>
-                <p className="tech">Tech: {project.tech}</p>
-              </motion.div>
-            ))}
+            <p className="contact-message" style={{ marginBottom: "1rem" }}>
+              Below is a professional project layout — add only GitHub links.
+            </p>
+
+            <ProjectsGrid />
           </motion.div>
         </div>
       </motion.div>
     </GateOpening>
+  );
+}
+
+function ProjectsGrid() {
+  const [projects] = useState([
+    {
+      id: 1,
+      title: "Project One",
+      desc: "Short description of project one.",
+      tech: ["React", "Node"],
+      github: "",
+    },
+    {
+      id: 2,
+      title: "Project Two",
+      desc: "Short description of project two.",
+      tech: ["Three.js", "Vite"],
+      github: "",
+    },
+    {
+      id: 3,
+      title: "Project Three",
+      desc: "Short description of project three.",
+      tech: ["Express", "MongoDB"],
+      github: "",
+    },
+  ]);
+
+  return (
+    <div className="projects-grid">
+      {projects.map((p) => (
+        <motion.div
+          key={p.id}
+          className="project-card"
+          initial={{ y: 8, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.45, delay: p.id * 0.08 }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: "1rem",
+            }}
+          >
+            <div>
+              <h3>{p.title}</h3>
+              <p className="desc">{p.desc}</p>
+              <div className="project-tags">
+                {p.tech.map((t, i) => (
+                  <span
+                    className="status unknown"
+                    key={i}
+                    style={{ marginRight: "8px" }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="project-actions">
+              <a
+                className="github-btn"
+                href={p.github || "#"}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${p.title} on GitHub`}
+              >
+                <FaGithub />
+                <span style={{ marginLeft: 8 }}>
+                  {p.github ? "View" : "Add Link"}
+                </span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
   );
 }

@@ -23,26 +23,26 @@ const imageVariants = {
 function Story({ onFinish }) {
   const storySlides = [
     {
-      text: "Once upon a time, Muqtehir dreamed of becoming a software developer.",
-      image: "https://via.placeholder.com/300?text=Dream",
+      text: "Once upon a time, Muqtehir dreamt of becoming a software developer.",
+      image: "/images/1%20future.png",
       color: "#ff6b35",
       variant: "dream",
     },
     {
       text: "He didn't know where to start, only that he had to begin.",
-      image: "https://via.placeholder.com/300?text=Doubt",
+      image: "/images/2%20confused.png",
       color: "#00e5ff",
       variant: "doubt",
     },
     {
       text: "With his first step, he realized the path had always been there.",
-      image: "https://via.placeholder.com/300?text=Progress",
+      image: "/images/3%20an%20idea.png",
       color: "#ff3fb2",
       variant: "progress",
     },
     {
       text: "How far has he gone?",
-      image: "https://via.placeholder.com/300?text=Confidence",
+      image: "/images/4%20found%20path.png",
       color: "#ffd166",
       variant: "confidence",
     },

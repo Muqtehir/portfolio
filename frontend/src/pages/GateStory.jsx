@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import GateOpening from "../components/GateOpening";
 import "../styles/gate-page.css";
 
 export default function GateStory({ onBack }) {
+  const [expanded, setExpanded] = useState(false);
   return (
     <GateOpening color="purple">
       <motion.div
@@ -30,18 +32,128 @@ export default function GateStory({ onBack }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <p>
-              I'm Muqtehir, a passionate software developer on a journey to
-              master the craft of building amazing digital experiences.
-            </p>
-            <p>
-              What started as a dream has evolved into a mission to create
-              innovative solutions that solve real problems.
-            </p>
-            <p>
-              Every line of code I write brings me closer to becoming the
-              developer I aspire to be.
-            </p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+              className="lead"
+            >
+              My name is <span className="accent">Mayaleeke Muqtehir</span>, my
+              friends also call me <span className="accent">Amir</span>, an{" "}
+              <span className="accent">SSS3 student</span>, also an inspiring{" "}
+              <span className="accent">16 years old student</span> and my
+              journey into software development did not begin with a clear plan
+              or a big moment. It began with{" "}
+              <span className="accent">curiosity</span> — a small wish to
+              understand how things worked behind the screen.
+            </motion.p>
+
+            <motion.div className="story-excerpt">
+              <motion.p
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                At the beginning, I was unsure of where to start. There were
+                many paths, many technologies, and many opinions. What I did
+                have, however, was the willingness to learn and to keep going
+                even when things did not make sense at first.
+              </motion.p>
+
+              {expanded && (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <p>
+                    I started with the basics —{" "}
+                    <strong>HTML, CSS, and JavaScript</strong> — making
+                    mistakes, fixing them, and slowly understanding how the web
+                    works.
+                  </p>
+
+                  <p>
+                    As time went on, web development became more than just
+                    writing code. I began to care deeply about{" "}
+                    <span className="accent">user experience</span>,
+                    interaction, and design. I learned that a good website is
+                    not only functional, but also intentional — every movement,
+                    color, and transition matters.
+                  </p>
+
+                  <p>
+                    Eventually, I stepped into <strong>full-stack</strong>
+                    development. I learned how to connect the frontend to the
+                    backend, how data is stored, and how real applications are
+                    structured. Building projects taught me patience,
+                    problem-solving, and the importance of writing code that
+                    actually works, not just code that looks good.
+                  </p>
+
+                  <p>
+                    This portfolio represents my journey so far. It is not a
+                    declaration of mastery, but a reflection of growth. I am
+                    still learning, still building, and still improving with
+                    every project. This is only a checkpoint — and the journey
+                    continues.
+                  </p>
+                </motion.div>
+              )}
+
+              <motion.button
+                className="read-toggle"
+                onClick={() => setExpanded((s) => !s)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {expanded ? "Show Less" : "Read More"}
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="story-journey"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+            >
+              <h4>Journey Highlights</h4>
+              <div className="journey-items">
+                <motion.div
+                  className="journey-pill"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <strong>Basics</strong>
+                  <span>HTML • CSS • JS</span>
+                </motion.div>
+
+                <motion.div
+                  className="journey-pill"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <strong>UX & Animation</strong>
+                  <span>Design, Motion, Interaction</span>
+                </motion.div>
+
+                <motion.div
+                  className="journey-pill"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <strong>Full-stack</strong>
+                  <span>Node • APIs • Databases</span>
+                </motion.div>
+
+                <motion.div
+                  className="journey-pill"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <strong>Projects</strong>
+                  <span>Practice & Production</span>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

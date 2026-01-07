@@ -7,6 +7,7 @@ import GateSkills from "./pages/GateSkills";
 import GateProjects from "./pages/GateProjects";
 import GateStatus from "./pages/GateStatus";
 import GateContact from "./pages/GateContact";
+import GateLearn from "./pages/GateLearn";
 
 function App() {
   const [stage, setStage] = useState("intro");
@@ -30,6 +31,7 @@ function App() {
     return <GateStatus onBack={handleBackFromGate} />;
   if (currentGate === "contact")
     return <GateContact onBack={handleBackFromGate} />;
+  if (currentGate === "learn") return <GateLearn onBack={handleBackFromGate} />;
 
   // Main flow
   return (
