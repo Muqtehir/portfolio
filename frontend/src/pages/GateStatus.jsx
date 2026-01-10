@@ -105,7 +105,7 @@ export default function GateStatus({ onBack }) {
                   }}
                 >
                   <span>Full-stack projects</span>
-                  <span className="status in-progress">In Progress</span>
+                  <span className="status in-progress">Unlocked</span>
                 </div>
                 <div
                   style={{
@@ -125,7 +125,7 @@ export default function GateStatus({ onBack }) {
                   }}
                 >
                   <span>Node.js / Express / MongoDB</span>
-                  <span className="status in-progress">Learning</span>
+                  <span className="status Learning">Improving</span>
                 </div>
                 <div
                   style={{
@@ -135,7 +135,7 @@ export default function GateStatus({ onBack }) {
                   }}
                 >
                   <span>Code Readability</span>
-                  <span className="status unlocked">Practicing</span>
+                  <span className="status unlocked">Unlocked</span>
                 </div>
               </div>
 

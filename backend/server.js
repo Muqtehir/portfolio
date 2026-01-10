@@ -10,8 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const projectRoutes = require("./routes/projectRoutes");
-app.use("/api/projects", projectRoutes);
 // contact routes (POST + protected GET)
 const contactRoutes = require("./routes/contactRoutes");
 app.use("/api/contact", contactRoutes);

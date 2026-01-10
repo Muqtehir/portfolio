@@ -48,24 +48,31 @@ function ProjectsGrid() {
   const [projects] = useState([
     {
       id: 1,
-      title: "Project One",
-      desc: "Short description of project one.",
-      tech: ["React", "Node"],
-      github: "",
+      title: "My Blog App",
+      desc: "Personal blog application with posts and markdown support.",
+      tech: ["React", "Node", "MongoDB"],
+      github: "https://github.com/Muqtehir/my-blog-app",
     },
     {
       id: 2,
-      title: "Project Two",
-      desc: "Short description of project two.",
-      tech: ["Three.js", "Vite"],
-      github: "",
+      title: "Portfolio",
+      desc: "This portfolio site showcasing projects and skills.",
+      tech: ["React", "Three.js", "Vite"],
+      github: "https://github.com/Muqtehir/portfolio",
     },
     {
       id: 3,
-      title: "Project Three",
-      desc: "Short description of project three.",
-      tech: ["Express", "MongoDB"],
-      github: "",
+      title: "Food Website",
+      desc: "Responsive food/restaurant landing site with menu pages.",
+      tech: ["HTML", "CSS", "JS"],
+      github: "https://github.com/Muqtehir/food-website",
+    },
+    {
+      id: 4,
+      title: "Shoe Shopping Website",
+      desc: "E-commerce demo for shoe listings and checkout flow.",
+      tech: ["React", "Stripe", "Firebase"],
+      github: "https://github.com/Muqtehir/shoe-shopping-website",
     },
   ]);
 

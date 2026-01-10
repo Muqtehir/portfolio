@@ -113,13 +113,15 @@ export default function GateSkills({ onBack }) {
     {
       category: "TOOLS & WORKFLOW",
       items: [
+        { icon: SiVisualstudiocode, name: "VS Code", points: [] },
         { icon: SiGit, name: "Git (add, commit, push)", points: [] },
         {
           icon: SiGithub,
           name: "GitHub (repositories, basic workflow)",
           points: [],
         },
-        { icon: SiVisualstudiocode, name: "VS Code", points: [] },
+
+        { icon: "🤖", name: "Using AI tools effectively", points: [] },
         { icon: SiNpm, name: "npm", points: [] },
         { icon: FaFolder, name: "Project folder structuring", points: [] },
         { icon: "▶️", name: "Running local dev servers", points: [] },

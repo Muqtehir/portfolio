@@ -23,7 +23,7 @@ const imageVariants = {
 function Story({ onFinish }) {
   const storySlides = [
     {
-      text: "Once upon a time, Muqtehir dreamt of becoming a software developer.",
+      text: "Once upon a time, Amir dreamt of becoming a software developer.",
       image: "/images/1%20future.png",
       color: "#ff6b35",
       variant: "dream",
@@ -80,6 +80,18 @@ function Story({ onFinish }) {
       }}
       onClick={handleContainerClick}
     >
+      <motion.button
+        className="skip-btn"
+        onClick={onFinish}
+        initial={{ opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.24 }}
+        aria-label="Skip story"
+      >
+        Skip →
+      </motion.button>
       <style>{`
         @keyframes bgSpin {
           0% { background-position: 0% 50% }
