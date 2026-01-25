@@ -25,9 +25,27 @@ if (smtpHost) {
     console.warn("SMTP verify failed:", err && err.message ? err.message : err);
   });
 } else {
-  console.warn(
-    "SMTP_HOST not set — email notifications disabled. Set SMTP_HOST/SMTP_USER/SMTP_PASS in .env to enable."
-  );
+  // No SMTP configured — create an Ethereal test account for development so emails still work locally.
+  // Ethereal is a fake SMTP service for testing: https://ethereal.email/
+  nodemailer
+    .createTestAccount()
+    .then((testAccount) => {
+      transporter = nodemailer.createTransport({
+        host: testAccount.smtp.host,
+        port: testAccount.smtp.port,
+        secure: testAccount.smtp.secure,
+        auth: { user: testAccount.user, pass: testAccount.pass },
+      });
+      console.log(
+        "Using Ethereal test SMTP account for email (dev only). Preview messages at the logged URL after sending.",
+      );
+    })
+    .catch((err) => {
+      console.warn(
+        "Could not create Ethereal test account:",
+        err && err.message ? err.message : err,
+      );
+    });
 }
 
 // POST /api/contact
@@ -72,8 +90,8 @@ router.post("/", async (req, res) => {
         .catch((err) =>
           console.error(
             "Error sending contact email:",
-            err && err.message ? err.message : err
-          )
+            err && err.message ? err.message : err,
+          ),
         );
     } else {
       console.warn("Email not sent: SMTP transporter not configured.");
@@ -89,19 +107,27 @@ router.post("/", async (req, res) => {
 // GET /api/contact?admin=TOKEN  (simple protection via ADMIN_TOKEN)
 // GET /api/contact - protected: requires admin token in header only
 router.get("/", async (req, res) => {
-  // Accept token via header only to avoid exposing secrets in URLs
+  // Accept token via header; allow ?admin=TOKEN as a fallback for local testing.
   const headerToken =
     req.headers["x-admin-token"] ||
     (req.headers.authorization || "").replace(/^Bearer\s+/i, "");
+  const queryToken = req.query && req.query.admin;
+  const token = headerToken || queryToken;
 
   if (!process.env.ADMIN_TOKEN) {
     console.warn("ADMIN_TOKEN not set - admin access is not configured.");
   }
 
-  if (!headerToken || headerToken !== process.env.ADMIN_TOKEN) {
+  if (!token || token !== process.env.ADMIN_TOKEN) {
     return res
       .status(401)
       .json({ error: "Unauthorized - admin token required in header" });
+  }
+
+  if (queryToken && !headerToken) {
+    console.warn(
+      "Admin token supplied via query string — avoid this in production.",
+    );
   }
 
   try {
