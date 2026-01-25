@@ -9,7 +9,6 @@ export default function GateContact({ onBack }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,7 +40,7 @@ export default function GateContact({ onBack }) {
 
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ fullName: "", email: "", subject: "", message: "" });
+        setFormData({ fullName: "", email: "", message: "" });
         setTimeout(() => setSubmitStatus(null), 3000);
       } else {
         setSubmitStatus("error");
@@ -217,23 +216,7 @@ export default function GateContact({ onBack }) {
                 />
               </motion.div>
 
-              <motion.div
-                className="form-group"
-                initial={{ x: -30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.2 }}
-              >
-                <label htmlFor="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="What's this about?"
-                />
-              </motion.div>
+              {/* Subject field removed */}
 
               <motion.div
                 className="form-group"
