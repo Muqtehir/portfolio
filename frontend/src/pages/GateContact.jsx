@@ -65,8 +65,8 @@ export default function GateContact({ onBack }) {
     {
       icon: FaWhatsapp,
       label: "WhatsApp",
-      value: "07032962346",
-      link: "https://wa.me/2347032962346",
+      value: "08060795403",
+      link: "https://wa.me/2348060795403",
       color: "#25D366",
       bgColor: "rgba(37, 211, 102, 0.06)",
     },

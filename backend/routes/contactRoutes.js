@@ -3,7 +3,8 @@ const router = express.Router();
 const Contact = require("../models/Contact");
 const nodemailer = require("nodemailer");
 
-// Configure SMTP transporter from env - best-effort (optional auth)
+// Configure a real SMTP transporter. Ethereal is intentionally not used here:
+// it accepts messages for testing but does not deliver them to the inbox.
 const smtpHost = process.env.SMTP_HOST;
 const smtpPort = process.env.SMTP_PORT
   ? parseInt(process.env.SMTP_PORT, 10)
@@ -12,40 +13,24 @@ const smtpSecure = process.env.SMTP_SECURE === "true";
 const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;
 
-let transporter = null;
-if (smtpHost) {
-  transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort || 587,
-    secure: smtpSecure || false,
-    auth: smtpUser && smtpPass ? { user: smtpUser, pass: smtpPass } : undefined,
-  });
+const transporter =
+  smtpHost && smtpUser && smtpPass
+    ? nodemailer.createTransport({
+        host: smtpHost,
+        port: smtpPort || 587,
+        secure: smtpSecure,
+        auth: { user: smtpUser, pass: smtpPass },
+      })
+    : null;
 
+if (transporter) {
   transporter.verify().catch((err) => {
-    console.warn("SMTP verify failed:", err && err.message ? err.message : err);
+    console.error("SMTP verify failed:", err && err.message ? err.message : err);
   });
 } else {
-  // No SMTP configured — create an Ethereal test account for development so emails still work locally.
-  // Ethereal is a fake SMTP service for testing: https://ethereal.email/
-  nodemailer
-    .createTestAccount()
-    .then((testAccount) => {
-      transporter = nodemailer.createTransport({
-        host: testAccount.smtp.host,
-        port: testAccount.smtp.port,
-        secure: testAccount.smtp.secure,
-        auth: { user: testAccount.user, pass: testAccount.pass },
-      });
-      console.log(
-        "Using Ethereal test SMTP account for email (dev only). Preview messages at the logged URL after sending.",
-      );
-    })
-    .catch((err) => {
-      console.warn(
-        "Could not create Ethereal test account:",
-        err && err.message ? err.message : err,
-      );
-    });
+  console.warn(
+    "SMTP is not configured. Contact form submissions cannot be delivered.",
+  );
 }
 
 // POST /api/contact
@@ -66,41 +51,29 @@ router.post("/", async (req, res) => {
     const contact = new Contact({ fullName, email, message });
     await contact.save();
 
-    // Send notification email (best-effort)
     const adminEmail =
       process.env.ADMIN_EMAIL || "izzatudeenmuqtehir@gmail.com";
-    if (transporter) {
-      const mailSubject = `New contact submission from ${fullName}`;
-      const mailText = `Name: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}`;
-      const mailHtml = `<p><strong>Name:</strong> ${fullName}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${(
-        message || ""
-      ).replace(/\n/g, "<br/>")}</p>`;
-
-      transporter
-        .sendMail({
-          from:
-            process.env.SMTP_FROM ||
-            `no-reply@${(smtpHost || "localhost").replace(/^smtp\./, "")}`,
-          to: adminEmail,
-          subject: mailSubject,
-          text: mailText,
-          html: mailHtml,
-        })
-        .then(() => console.log(`Contact email sent to ${adminEmail}`))
-        .catch((err) =>
-          console.error(
-            "Error sending contact email:",
-            err && err.message ? err.message : err,
-          ),
-        );
-    } else {
-      console.warn("Email not sent: SMTP transporter not configured.");
+    if (!transporter) {
+      return res.status(503).json({
+        error: "Email service is not configured. Please try again later.",
+      });
     }
 
-    return res.status(200).json({ message: "Contact saved" });
+    const mailSubject = `New contact submission from ${fullName}`;
+    const mailText = `Name: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}`;
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || smtpUser,
+      to: adminEmail,
+      replyTo: email,
+      subject: mailSubject,
+      text: mailText,
+    });
+
+    console.log(`Contact email sent to ${adminEmail}`);
+    return res.status(200).json({ message: "Contact saved and email sent" });
   } catch (err) {
-    console.error("Error saving contact:", err);
-    return res.status(500).json({ error: "Server error" });
+    console.error("Error processing contact submission:", err);
+    return res.status(500).json({ error: "Could not send contact message" });
   }
 });
 

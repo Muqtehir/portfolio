@@ -38,14 +38,30 @@ export default function GateStory({ onBack }) {
               transition={{ delay: 0.9 }}
               className="lead"
             >
-              My name is <span className="accent">Mayaleeke Muqtehir</span>, my
-              friends also call me <span className="accent">Amir</span>, an{" "}
-              <span className="accent">SSS3 student</span>, also an inspiring{" "}
-              <span className="accent">16 years old student</span> and my
-              journey into software development did not begin with a clear plan
-              or a big moment. It began with{" "}
-              <span className="accent">curiosity</span> — a small wish to
-              understand how things worked behind the screen.
+              My name is <strong>Mayaleeke Muqtehir</strong>, though I'm also
+              known as <strong>Amir</strong>. My journey into technology began
+              with curiosity — a desire to understand how the things behind the
+              screen actually worked.
+              <br />
+              <br />
+              What started as an interest in <strong>software development</strong>
+              has grown into a broader journey through <strong>full-stack
+              development, cybersecurity, and blockchain technology</strong>.
+              Along the way, I've worked with technologies such as{" "}
+              <strong>React, Node.js, Express, MongoDB, Git, and modern web
+              development tools</strong>, while continuing to strengthen my
+              foundations and explore new areas of technology.
+              <br />
+              <br />
+              I'm now focused on taking the next step in my journey —
+              building real-world projects, developing my skills in
+              <strong>cybersecurity and blockchain</strong>, and gradually
+              turning what I learn into practical solutions.
+              <br />
+              <br />
+              This portfolio is a reflection of that journey: <strong>where I
+              started, what I've built, what I'm learning now, and where I'm
+              going next.</strong>
             </motion.p>
 
             <motion.div className="story-excerpt">

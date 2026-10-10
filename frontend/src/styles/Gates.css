@@ -1,23 +1,23 @@
 .gates-container {
   min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, #0a0a0e 0%, #1a1a2e 50%, #0f0f1e 100%);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 3rem;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem calc(env(safe-area-inset-bottom) + 80px);
   place-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Background animated elements */
 .gates-container::before {
   content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.03) 1px,
@@ -25,7 +25,7 @@
   );
   background-size: 50px 50px;
   animation: gridShift 20s linear infinite;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 

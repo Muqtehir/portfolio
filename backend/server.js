@@ -14,6 +14,9 @@ app.use(express.json());
 const contactRoutes = require("./routes/contactRoutes");
 app.use("/api/contact", contactRoutes);
 
+const projectRoutes = require("./routes/projectRoutes");
+app.use("/api/projects", projectRoutes);
+
 // Test route
 app.get("/", (req, res) => {
   res.send("Backend is running...");

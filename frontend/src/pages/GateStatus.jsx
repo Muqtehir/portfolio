@@ -32,18 +32,16 @@ export default function GateStatus({ onBack }) {
             <div className="status-item" style={{ textAlign: "left" }}>
               <div className="story-text">
                 <p className="lead">
-                  I am currently a 16-year-old SS3 student who is actively
-                  learning and building in web development. At this stage, my
-                  focus is not on being perfect, but on understanding how things
-                  actually work and improving step by step.
+                  I build and ship full-stack web experiences that connect
+                  thoughtful design with reliable functionality. As a full-stack
+                  freelancer, I focus on delivering practical solutions that are
+                  clean, user-friendly, and built to work well in real use.
                 </p>
 
                 <p>
-                  Right now, I am working as a full-stack beginner, building
-                  real projects with both frontend and backend. I am
-                  strengthening my foundation in JavaScript and React while also
-                  improving how I structure backend logic using Node.js,
-                  Express, and MongoDB.
+                  My work spans frontend interfaces and backend systems, using
+                  JavaScript, React, Node.js, Express, and MongoDB to create
+                  smooth, scalable applications from concept to deployment.
                 </p>
 
                 <p>I am especially focused on:</p>
@@ -70,15 +68,15 @@ export default function GateStatus({ onBack }) {
                 </div>
 
                 <p>
-                  At the moment, I am still learning and experimenting, but I am
-                  consistent. I build, break, fix, and rebuild — and each
-                  project helps me grow more confident in my skills.
+                  I approach each project with a focus on quality, structure, and
+                  long-term maintainability. I build, refine, and optimize until
+                  the product feels solid and professional.
                 </p>
 
                 <p>
-                  This portfolio represents my current level, not my final
-                  destination. I am still learning, still improving, and still
-                  moving forward.
+                  This portfolio reflects the work I create as a full-stack
+                  freelancer, with an emphasis on creative execution, problem
+                  solving, and dependable delivery.
                 </p>
               </div>
             </div>
@@ -104,8 +102,8 @@ export default function GateStatus({ onBack }) {
                     alignItems: "center",
                   }}
                 >
-                  <span>Full-stack projects</span>
-                  <span className="status in-progress">Unlocked</span>
+                  <span>Full-stack delivery</span>
+                  <span className="status unlocked">Unlocked</span>
                 </div>
                 <div
                   style={{
@@ -115,7 +113,7 @@ export default function GateStatus({ onBack }) {
                   }}
                 >
                   <span>JavaScript & React</span>
-                  <span className="status in-progress">Improving</span>
+                  <span className="status unlocked">Unlocked</span>
                 </div>
                 <div
                   style={{
@@ -125,7 +123,7 @@ export default function GateStatus({ onBack }) {
                   }}
                 >
                   <span>Node.js / Express / MongoDB</span>
-                  <span className="status Learning">Improving</span>
+                  <span className="status unlocked">Unlocked</span>
                 </div>
                 <div
                   style={{
@@ -134,7 +132,7 @@ export default function GateStatus({ onBack }) {
                     alignItems: "center",
                   }}
                 >
-                  <span>Code Readability</span>
+                  <span>Code quality</span>
                   <span className="status unlocked">Unlocked</span>
                 </div>
               </div>
