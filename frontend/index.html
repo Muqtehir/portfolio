@@ -2,12 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>portfolio</title>
+    <meta name="theme-color" content="#07080f" />
+    <meta
+      name="description"
+      content="I build and ship full-stack web experiences that connect thoughtful design with reliable functionality."
+    />
+    <title>Muqtehir Mayaleeke | Full-Stack Developer</title>
+    <link rel="canonical" href="https://your-domain/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Muqtehir Mayaleeke | Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="I build and ship full-stack web experiences that connect thoughtful design with reliable functionality."
+    />
+    <meta property="og:url" content="https://your-domain/" />
+    <meta property="og:image" content="https://your-domain/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Muqtehir Mayaleeke | Full-Stack Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Muqtehir Mayaleeke | Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="I build and ship full-stack web experiences that connect thoughtful design with reliable functionality."
+    />
+    <meta name="twitter:image" content="https://your-domain/og-image.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muqtehir Mayaleeke",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://your-domain/",
+        "sameAs": ["https://github.com/Muqtehir/portfolio"]
+      }
+    </script>
+    <style>
+      html[data-intro="on"]::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9990;
+        background: #05060c;
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          var seen = sessionStorage.getItem("introSeen");
+          var deep = location.hash.length > 1 || location.pathname !== "%BASE_URL%";
+          var enabled = !seen && !deep;
+          if (enabled) {
+            document.documentElement.setAttribute("data-intro", "on");
+            setTimeout(function () {
+              document.documentElement.removeAttribute("data-intro");
+            }, 9000);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const brands = navigator.userAgentData?.brands;
+        const userAgent = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+        const hasChromiumBrand = brands?.some(({ brand }) => brand.includes("Chromium"));
+        const isChromium = hasChromiumBrand ??
+          (!isIOS && /(?:Chromium|Chrome|Edg|OPR)\//.test(userAgent));
+        if (isChromium) root.classList.add("lg-refract");
+
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        try {
+          const savedTheme = window.localStorage.getItem("portfolio-theme");
+          root.dataset.theme =
+            savedTheme === "light" || savedTheme === "dark" ? savedTheme : systemTheme;
+        } catch (error) {
+          console.warn("Could not read the saved theme preference:", error);
+          root.dataset.theme = systemTheme;
+        }
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+          themeColor.setAttribute(
+            "content",
+            root.dataset.theme === "dark" ? "#07080f" : "#f6f2e9",
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <div id="intro-root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

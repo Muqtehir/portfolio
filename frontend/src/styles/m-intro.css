@@ -1,0 +1,220 @@
+:root {
+  --intro-bg: #05060c;
+  --intro-violet: #8b5cf6;
+  --intro-violet-soft: rgba(139, 92, 246, 0.26);
+  --intro-pink: #f472b6;
+  --intro-cyan: #22d3ee;
+  --intro-text: rgba(230, 232, 255, 0.96);
+  --intro-muted: rgba(202, 206, 255, 0.72);
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+#page-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--intro-bg);
+  overflow: hidden;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#page-intro[data-exit="true"] {
+  opacity: 0;
+}
+
+#page-intro .intro-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(176, 110, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.12), transparent 44%);
+}
+
+#page-intro .intro-svg {
+  position: relative;
+  width: min(54vw, 440px);
+  height: min(54vw, 440px);
+  max-width: 440px;
+  max-height: 440px;
+  overflow: visible;
+}
+
+#page-intro .intro-grid,
+#page-intro .intro-guides,
+#page-intro .intro-ghost,
+#page-intro .intro-outline,
+#page-intro .intro-fill,
+#page-intro .intro-shards-wrap,
+#page-intro .intro-ring {
+  transform-origin: center;
+}
+
+#page-intro .intro-grid path,
+#page-intro .intro-guide,
+#page-intro .intro-ghost,
+#page-intro .intro-outline,
+#page-intro .intro-ring {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#page-intro .intro-grid path {
+  stroke: rgba(34, 211, 238, 0.16);
+  stroke-width: 1;
+  opacity: 0;
+}
+
+#page-intro .intro-guide {
+  stroke: rgba(34, 211, 238, 0.8);
+  stroke-width: 1.25;
+  opacity: 0;
+}
+
+#page-intro .intro-ghost {
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1.2;
+  opacity: 0;
+}
+
+#page-intro .intro-outline {
+  stroke: url(#intro-stroke-gradient);
+  stroke-width: 6;
+  opacity: 1;
+}
+
+#page-intro .intro-fill {
+  fill: url(#intro-fill-gradient);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+#page-intro .intro-shard {
+  fill: rgba(34, 211, 238, 0.2);
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 1;
+}
+
+#page-intro .intro-ring {
+  stroke: rgba(255, 255, 255, 0.58);
+  stroke-width: 1.6;
+  fill: none;
+  opacity: 0;
+}
+
+#page-intro .intro-svg defs {
+  pointer-events: none;
+}
+
+#page-intro .intro-svg gradient {
+  pointer-events: none;
+}
+
+#page-intro .intro-type-wrap {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(50% + 180px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+}
+
+#page-intro .intro-title,
+#page-intro .intro-role {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#page-intro .intro-title {
+  color: var(--intro-text);
+  font-size: clamp(0.8rem, 1.3vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.26em;
+}
+
+#page-intro .intro-role {
+  color: var(--intro-muted);
+  font-size: clamp(0.7rem, 1vw, 0.9rem);
+  letter-spacing: 0.28em;
+  font-weight: 500;
+}
+
+#page-intro .intro-reveal {
+  position: absolute;
+  width: 18vmin;
+  height: 18vmin;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 2px solid rgba(139, 92, 246, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(244, 114, 182, 0.8),
+    0 0 0 7px rgba(34, 211, 238, 0.08),
+    0 0 30px rgba(139, 92, 246, 0.4),
+    0 0 56px rgba(244, 114, 182, 0.2);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  pointer-events: none;
+}
+
+#page-intro .intro-svg defs {
+  display: block;
+}
+
+#page-intro .intro-svg .intro-fill {
+  filter: none;
+}
+
+#page-intro .intro-svg > defs {
+  position: absolute;
+}
+
+@media (max-width: 640px) {
+  #page-intro .intro-svg {
+    width: min(70vw, 380px);
+    height: min(70vw, 380px);
+  }
+
+  #page-intro .intro-type-wrap {
+    top: calc(50% + 160px);
+  }
+
+  #page-intro .intro-title {
+    letter-spacing: 0.18em;
+  }
+
+  #page-intro .intro-role {
+    letter-spacing: 0.2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-intro {
+    transition: opacity 0.15s ease;
+  }
+
+  #page-intro .intro-type-wrap,
+  #page-intro .intro-svg,
+  #page-intro .intro-reveal {
+    transition: none;
+  }
+}

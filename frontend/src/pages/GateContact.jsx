@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import GateOpening from "../components/GateOpening";
 import "../styles/gate-page.css";
+import { portfolio } from "../data/portfolio";
 import { MdEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
+import { sendContactMessage } from "../utils/contact";
 
 export default function GateContact({ onBack }) {
   const [formData, setFormData] = useState({
@@ -11,8 +13,8 @@ export default function GateContact({ onBack }) {
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,28 +28,16 @@ export default function GateContact({ onBack }) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-    // determine API base: prefer VITE_API_URL, otherwise default to localhost:4000
-    const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
     try {
-      const response = await fetch(`${API_BASE}/api/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ fullName: "", email: "", message: "" });
-        setTimeout(() => setSubmitStatus(null), 3000);
-      } else {
-        setSubmitStatus("error");
-      }
+      await sendContactMessage(formData);
+      setSubmitStatus("success");
+      setFormData({ fullName: "", email: "", message: "" });
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitStatus("error");
+      console.error("Unable to send contact form:", error);
+      setSubmitStatus(
+        error.code === "EMAILJS_CONFIG_MISSING" ? "configuration" : "error",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -57,8 +47,8 @@ export default function GateContact({ onBack }) {
     {
       icon: MdEmail,
       label: "Email",
-      value: "izzatudeenmuqtehir@gmail.com",
-      link: "mailto:izzatudeenmuqtehir@gmail.com",
+      value: portfolio.email,
+      link: portfolio.emailLink,
       color: "#D44638",
       bgColor: "rgba(212, 70, 56, 0.06)",
     },
@@ -176,7 +166,7 @@ export default function GateContact({ onBack }) {
             transition={{ delay: 0.9 }}
           >
             <h2 className="form-title">
-              📝 Or fill out the form below to reach my assistant
+              📝 Or send me a message using the form below
             </h2>
 
             <form onSubmit={handleSubmit} className="contact-form">
@@ -246,37 +236,23 @@ export default function GateContact({ onBack }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isSubmitting ? (
-                  <motion.span
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    ⏳
-                  </motion.span>
-                ) : (
-                  "✉️ SEND MESSAGE"
-                )}
+                {isSubmitting ? "Sending…" : "✉️ SEND MESSAGE"}
               </motion.button>
 
-              {submitStatus === "success" && (
+              {submitStatus && (
                 <motion.div
-                  className="status-message success"
+                  className={`status-message ${submitStatus}`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
+                  role="status"
+                  aria-live="polite"
                 >
-                  ✅ Message sent successfully! I'll get back to you soon.
-                </motion.div>
-              )}
-
-              {submitStatus === "error" && (
-                <motion.div
-                  className="status-message error"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  ❌ Oops! Something went wrong. Please try again.
+                  {submitStatus === "success"
+                    ? "Message sent successfully. Thanks for reaching out!"
+                    : submitStatus === "configuration"
+                      ? "Contact email is not configured yet. Add the EmailJS settings to the frontend environment."
+                      : "We couldn't send your message. Please try again later."}
                 </motion.div>
               )}
             </form>

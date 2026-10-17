@@ -1,0 +1,264 @@
+.gates-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #0a0a0e 0%, #1a1a2e 50%, #0f0f1e 100%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  padding: 4rem 2rem calc(env(safe-area-inset-bottom) + 80px);
+  place-items: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* Background animated elements */
+.gates-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 50px 50px;
+  animation: gridShift 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes gridShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Gate base styling */
+.gate {
+  position: relative;
+  width: 280px;
+  height: 160px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 35, 0.8),
+    rgba(35, 35, 60, 0.5)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  z-index: 1;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Gate shine effect */
+.gate-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gate:hover .gate-shine {
+  left: 100%;
+}
+
+/* Gate border accent */
+.gate-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  z-index: 3;
+}
+
+.gate-border.purple {
+  background: linear-gradient(90deg, transparent, #a050ff, transparent);
+  box-shadow: 0 0 12px rgba(160, 80, 255, 0.6);
+}
+.gate-border.green {
+  background: linear-gradient(90deg, transparent, #00ff96, transparent);
+  box-shadow: 0 0 12px rgba(0, 255, 150, 0.6);
+}
+.gate-border.blue {
+  background: linear-gradient(90deg, transparent, #00b4ff, transparent);
+  box-shadow: 0 0 12px rgba(0, 180, 255, 0.6);
+}
+.gate-border.red {
+  background: linear-gradient(90deg, transparent, #ff5050, transparent);
+  box-shadow: 0 0 12px rgba(255, 80, 80, 0.6);
+}
+.gate-border.gold {
+  background: linear-gradient(90deg, transparent, #ffc850, transparent);
+  box-shadow: 0 0 12px rgba(255, 200, 80, 0.6);
+}
+
+.gate-border.teal {
+  background: linear-gradient(90deg, transparent, #00d1b2, transparent);
+  box-shadow: 0 0 12px rgba(0, 209, 178, 0.6);
+}
+
+/* Gate icon */
+.gate-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+  z-index: 4;
+}
+
+.gate:hover .gate-icon {
+  transform: scale(1.2) rotateY(10deg);
+}
+
+/* Gate label */
+.gate-label {
+  color: #fff;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 4;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* Light effect on hover */
+.gate-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+  filter: blur(20px);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.gate-light.purple {
+  background: rgba(160, 80, 255, 0.4);
+}
+.gate-light.green {
+  background: rgba(0, 255, 150, 0.4);
+}
+.gate-light.blue {
+  background: rgba(0, 180, 255, 0.4);
+}
+.gate-light.red {
+  background: rgba(255, 80, 80, 0.4);
+}
+.gate-light.gold {
+  background: rgba(255, 200, 80, 0.4);
+}
+.gate-light.teal {
+  background: rgba(0, 209, 178, 0.35);
+}
+
+.gate.teal {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 209, 178, 0.2);
+}
+.gate.teal:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(0, 209, 178, 0.5);
+}
+.gate:hover .gate-light {
+  opacity: 1;
+}
+
+/* Glow effects */
+.gate.purple {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(160, 80, 255, 0.2);
+}
+.gate.purple:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(160, 80, 255, 0.5);
+}
+
+.gate.green {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 255, 150, 0.2);
+}
+.gate.green:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(0, 255, 150, 0.5);
+}
+
+.gate.blue {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 180, 255, 0.2);
+}
+.gate.blue:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(0, 180, 255, 0.5);
+}
+
+.gate.red {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 80, 80, 0.2);
+}
+.gate.red:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 80, 80, 0.5);
+}
+
+.gate.gold {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 200, 80, 0.2);
+}
+.gate.gold:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 200, 80, 0.5);
+}
+
+/* 📱 Mobile responsive */
+@media (max-width: 768px) {
+  .gates-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .gate {
+    width: 100%;
+    max-width: 320px;
+    height: 140px;
+  }
+
+  .gate-icon {
+    font-size: 2rem;
+  }
+
+  .gate-label {
+    font-size: 0.85rem;
+  }
+}

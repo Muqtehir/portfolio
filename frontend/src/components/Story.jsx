@@ -23,7 +23,7 @@ const imageVariants = {
 function Story({ onFinish }) {
   const storySlides = [
     {
-      text: "Once upon a time, Amir dreamt of becoming a software developer.",
+      text: "Once upon a time, Muqtehir Mayaleeke dreamt of becoming a software developer.",
       image: "/images/1%20future.png",
       color: "#ff6b35",
       variant: "dream",
@@ -121,7 +121,7 @@ function Story({ onFinish }) {
           >
             <motion.img
               src={storySlides[index].image}
-              alt="story"
+              alt=""
               variants={imageVariants[storySlides[index].variant]}
               initial="initial"
               animate="animate"

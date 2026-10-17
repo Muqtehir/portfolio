@@ -38,8 +38,7 @@ export default function GateStory({ onBack }) {
               transition={{ delay: 0.9 }}
               className="lead"
             >
-              My name is <strong>Mayaleeke Muqtehir</strong>, though I'm also
-              known as <strong>Amir</strong>. My journey into technology began
+              My name is <strong>Muqtehir Mayaleeke</strong>. My journey into technology began
               with curiosity — a desire to understand how the things behind the
               screen actually worked.
               <br />

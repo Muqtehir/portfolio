@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="48" x2="650" y2="540" gradientUnits="userSpaceOnUse"><stop stop-color="#f2eee7"/><stop offset="1" stop-color="#e6e1d8"/></linearGradient>
+    <linearGradient id="cover" x1="360" y1="200" x2="580" y2="430" gradientUnits="userSpaceOnUse"><stop stop-color="#6c7165"/><stop offset="1" stop-color="#b5aa90"/></linearGradient>
+    <filter id="shadow" x="52" y="34" width="620" height="498" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect width="720" height="560" rx="28" fill="url(#bg)"/><circle cx="630" cy="88" r="118" fill="#d8d1c5" opacity=".45"/>
+  <rect x="72" y="64" width="576" height="432" rx="18" fill="#302e2a" opacity=".12" filter="url(#shadow)"/><rect x="72" y="54" width="576" height="432" rx="15" fill="#fffdf8"/>
+  <path d="M72 69a15 15 0 0 1 15-15h546a15 15 0 0 1 15 15v29H72V69Z" fill="#f7f5ef"/><circle cx="94" cy="77" r="4" fill="#d7b4a5"/><circle cx="109" cy="77" r="4" fill="#dfc58f"/><circle cx="124" cy="77" r="4" fill="#a4b2a0"/><rect x="266" y="68" width="188" height="18" rx="9" fill="#eae7e0"/>
+  <path d="M110 135h116" stroke="#252720" stroke-width="5" stroke-linecap="round"/><circle cx="563" cy="136" r="14" fill="#ebe7de"/><path d="m559 136 4 4 7-8" stroke="#5d6554" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M111 194h152" stroke="#a58969" stroke-width="2" stroke-linecap="round"/><text x="111" y="224" fill="#82755f" font-family="Georgia,serif" font-size="10" letter-spacing="2.4">THE JOURNAL</text>
+  <text x="111" y="263" fill="#22231f" font-family="Georgia,serif" font-size="29">Stories worth</text><text x="111" y="298" fill="#22231f" font-family="Georgia,serif" font-size="29">staying for.</text><path d="M111 322h175" stroke="#e3ded3"/>
+  <text x="111" y="350" fill="#77766e" font-family="Arial,sans-serif" font-size="10">Ideas, notes and things discovered</text><text x="111" y="366" fill="#77766e" font-family="Arial,sans-serif" font-size="10">along the way.</text>
+  <rect x="111" y="390" width="106" height="29" rx="14.5" fill="#353a30"/><text x="129" y="408" fill="#fffdf8" font-family="Arial,sans-serif" font-size="9">Read the latest  →</text>
+  <rect x="329" y="188" width="272" height="222" rx="9" fill="url(#cover)"/><circle cx="468" cy="278" r="66" fill="#c4b89e" opacity=".85"/>
+  <path d="M361 355c29-72 61-99 101-76 24 14 31 38 44 43 20 9 40-12 95-67v146H361v-46Z" fill="#58604f"/><path d="M376 353c40-37 70-39 95-15 29 27 49 25 81-6 16-15 31-32 49-44v122H376v-57Z" fill="#41483f"/><path d="M362 391c62-14 121-10 174 0 20 4 40 5 65 1v18H362v-19Z" fill="#d9c9a6" opacity=".65"/>
+  <text x="111" y="457" fill="#87847a" font-family="Arial,sans-serif" font-size="9" letter-spacing="1.2">A PLACE FOR THOUGHTFUL WORDS</text><rect x="111" y="472" width="108" height="3" rx="1.5" fill="#b49b76"/>
+</svg>
