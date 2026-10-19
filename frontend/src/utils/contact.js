@@ -28,6 +28,7 @@ export async function sendContactMessage({ email, fullName, message }) {
       user_email: email,
       from_email: email,
       reply_to: email,
+      title: `Portfolio contact from ${fullName}`,
       message,
       subject: `Portfolio contact from ${fullName}`,
     },
