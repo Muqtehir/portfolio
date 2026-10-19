@@ -20,7 +20,13 @@ export async function sendContactMessage({ email, fullName, message }) {
     EMAILJS_SERVICE_ID,
     EMAILJS_TEMPLATE_ID,
     {
+      name: fullName,
+      full_name: fullName,
+      user_name: fullName,
       from_name: fullName,
+      email,
+      user_email: email,
+      from_email: email,
       reply_to: email,
       message,
       subject: `Portfolio contact from ${fullName}`,
