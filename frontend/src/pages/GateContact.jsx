@@ -4,7 +4,7 @@ import GateOpening from "../components/GateOpening";
 import "../styles/gate-page.css";
 import { portfolio } from "../data/portfolio";
 import { MdEmail } from "react-icons/md";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { sendContactMessage } from "../utils/contact";
 
 export default function GateContact({ onBack }) {
@@ -59,6 +59,14 @@ export default function GateContact({ onBack }) {
       link: "https://wa.me/2348060795403",
       color: "#25D366",
       bgColor: "rgba(37, 211, 102, 0.06)",
+    },
+    {
+      icon: FaLinkedinIn,
+      label: "LinkedIn",
+      value: "LinkedIn",
+      link: portfolio.linkedin,
+      color: "#0A66C2",
+      bgColor: "rgba(10, 102, 194, 0.06)",
     },
   ];
 

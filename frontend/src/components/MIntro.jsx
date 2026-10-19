@@ -101,14 +101,11 @@ export default function MIntro({ onComplete }) {
 
       const t = normalize((elapsed - 950) / 550);
       const q = normalize((elapsed - 1750) / 900);
-      const revealT = normalize((elapsed - revealStart) / revealDuration);
-
       let x = 0;
       let y = 0;
       let rotation = 0;
       const deconstruct = easeOutCubic(t);
       const reconstruct = easeInOutCubic(q);
-      const reveal = easeOutCubic(revealT);
 
       if (elapsed < 950) {
         x = 0;
@@ -148,8 +145,6 @@ export default function MIntro({ onComplete }) {
 
     const animate = (now) => {
       const elapsed = now - start;
-      const progress = clamp(elapsed / totalDuration, 0, 1);
-
       if (isSimpleMode) {
         const fadeIn = easeInOutCubic(clamp(elapsed / 1000, 0, 1));
         const fadeOut = easeInOutCubic(clamp((elapsed - 1500) / 500, 0, 1));

@@ -3,7 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { portfolio } from "../data/portfolio";
 import Reveal from "./Reveal";
 import MagneticAction from "./MagneticAction";
-import useTheme from "../hooks/useTheme";
 import { useIntroPhase } from "./intro/IntroPhaseContext";
 
 const DarkHeroScene = lazy(() => import("./DarkHeroScene"));
@@ -11,12 +10,11 @@ const DarkHeroScene = lazy(() => import("./DarkHeroScene"));
 export default function Hero() {
   const [storyOpen, setStoryOpen] = useState(false);
   const reduceMotion = useReducedMotion();
-  const theme = useTheme();
   const { started } = useIntroPhase();
 
   return (
     <section className="hero-section page-shell" id="home">
-      <div className={`hero-grid${theme === "dark" ? "" : " hero-grid--text-only"}`}>
+      <div className="hero-grid">
         <Reveal className="hero-copy" introStarted={started}>
           <Reveal delay={0.04} introStarted={started}><p className="eyebrow"><span className="availability-dot" /> Portfolio / 2026</p></Reveal>
           <Reveal delay={0.1} introStarted={started}><p className="hero-greeting">Hi, I&apos;m {portfolio.name}</p></Reveal>
@@ -43,13 +41,11 @@ export default function Hero() {
           </Reveal>
         </Reveal>
 
-        {theme === "dark" && (
-          <Reveal className="hero-visual has-dark-scene" delay={0.12} hoverY={4} introStarted={started}>
-            <Suspense fallback={<div className="scene-skeleton" aria-hidden="true"><span /></div>}>
-              <DarkHeroScene started={started} />
-            </Suspense>
-          </Reveal>
-        )}
+        <Reveal className="hero-visual has-dark-scene" delay={0.12} hoverY={4} introStarted={started}>
+          <Suspense fallback={<div className="scene-skeleton" aria-hidden="true"><span /></div>}>
+            <DarkHeroScene started={started} />
+          </Suspense>
+        </Reveal>
       </div>
 
       <Reveal className="about-panel" introStarted={started}>

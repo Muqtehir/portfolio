@@ -1,5 +1,5 @@
 import { createElement, useEffect, useRef, useState } from "react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { LuCopy, LuDownload } from "react-icons/lu";
@@ -29,7 +29,14 @@ const contactMethods = [
     icon: FaGithub,
     external: true,
   },
-  ...["linkedin", "upwork", "fiverr"]
+  {
+    label: "LinkedIn",
+    value: "LinkedIn",
+    href: portfolio.linkedin,
+    icon: FaLinkedinIn,
+    external: true,
+  },
+  ...["upwork", "fiverr"]
     .filter((key) => portfolio[key])
     .map((key) => ({
       label: key[0].toUpperCase() + key.slice(1),

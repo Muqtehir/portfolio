@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const particleColors = ["#ff6b35", "#00e5ff", "#ff3fb2", "#ffd166"];
+const particles = Array.from({ length: 10 }, (_, index) => ({
+  left: `${10 + ((index * 37) % 80)}%`,
+  top: `${5 + ((index * 53) % 90)}%`,
+  size: 6 + ((index * 17) % 28),
+  color: particleColors[index % particleColors.length],
+  delay: ((index * 7) % 30) / 10,
+  duration: 5 + ((index * 11) % 40) / 10,
+}));
+
 const imageVariants = {
   dream: {
     initial: { opacity: 0, y: 20 },
@@ -62,15 +72,6 @@ function Story({ onFinish }) {
   const handleContainerClick = () => {
     if (index < storySlides.length - 1) setIndex((i) => i + 1);
   };
-
-  const particles = Array.from({ length: 10 }).map((_, i) => ({
-    left: `${10 + Math.random() * 80}%`,
-    top: `${5 + Math.random() * 90}%`,
-    size: 6 + Math.random() * 28,
-    color: ["#ff6b35", "#00e5ff", "#ff3fb2", "#ffd166"][i % 4],
-    delay: Math.random() * 3,
-    duration: 5 + Math.random() * 4,
-  }));
 
   return (
     <div

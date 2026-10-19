@@ -132,7 +132,7 @@ export default function ProfileSections() {
               const value = stat.source === "projects"
                 ? portfolio.projects.length
                 : stat.source === "skills"
-                  ? skills.length
+                  ? new Set(skills.map((skill) => skill.name)).size
                   : stat.value;
 
               return (
