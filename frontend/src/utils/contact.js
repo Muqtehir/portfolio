@@ -1,10 +1,14 @@
 import emailjs from "@emailjs/browser";
 
-export async function sendContactMessage({ email, fullName, message }) {
-  const { VITE_EMAILJS_PUBLIC_KEY, VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID } =
-    import.meta.env;
+const EMAILJS_PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "z8p4cW6WnLpd3g5FA";
+const EMAILJS_SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_vhulg89";
+const EMAILJS_TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_v478kbo";
 
-  if (!VITE_EMAILJS_PUBLIC_KEY || !VITE_EMAILJS_SERVICE_ID || !VITE_EMAILJS_TEMPLATE_ID) {
+export async function sendContactMessage({ email, fullName, message }) {
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
     const error = new Error(
       "Contact email is not configured. Set the EmailJS public key, service ID, and template ID.",
     );
@@ -13,15 +17,15 @@ export async function sendContactMessage({ email, fullName, message }) {
   }
 
   return emailjs.send(
-    VITE_EMAILJS_SERVICE_ID,
-    VITE_EMAILJS_TEMPLATE_ID,
+    EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID,
     {
       from_name: fullName,
       reply_to: email,
       message,
       subject: `Portfolio contact from ${fullName}`,
     },
-    { publicKey: VITE_EMAILJS_PUBLIC_KEY },
+    { publicKey: EMAILJS_PUBLIC_KEY },
   );
 }
 

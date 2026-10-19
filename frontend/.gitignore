@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -12,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
+!.env.*.example
 
 # Editor directories and files
 .vscode/*
@@ -23,21 +26,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-=======
-# Top-level ignores
-node_modules/
-.env
-
-# frontend
-/frontend/node_modules/
-/frontend/dist/
-
-# backend
-/backend/node_modules/
-/backend/dist/
-
-# Editor
-.vscode/
-.idea/
-.DS_Store
->>>>>>> 6f50f49502cab98c3dc9a67d01b2d076ee29270b
