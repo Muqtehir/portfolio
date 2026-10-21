@@ -175,8 +175,8 @@ export const portfolio = {
   ],
   stats: [
     { value: "2+", label: "Years building" },
-    { value: "5", label: "Projects" },
-    { value: "22", label: "Technologies", source: "skills" },
+    { value: "10+", label: "Projects" },
+    { value: "25+", label: "Technologies" },
     { value: "Security + Blockchain", label: "Next focus", kind: "text" },
   ],
   milestones: [
