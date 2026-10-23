@@ -52,6 +52,7 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
   const copyStatusTimer = useRef(null);
+  const resumeHref = `${portfolio.resume.path}?v=${portfolio.resume.updated}`;
 
   useEffect(
     () => () => {
@@ -108,34 +109,57 @@ export default function ContactSection() {
             <p>Let&apos;s connect! Reach out via email or WhatsApp</p>
             <p className="contact-availability">{portfolio.availability}</p>
             <div className="contact-methods">
-              {contactMethods.map(({ label, value, href, icon: Icon, external, copyable }) => (
-                <div className="contact-method-row" key={label}>
+              {contactMethods.map(({ label, value, href, icon: Icon, external, copyable }) => {
+                const card = (
                   <a
-                    className="contact-method"
+                    className={`contact-method${copyable ? " contact-email-card" : ""}`}
                     href={href}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noreferrer" : undefined}
                   >
                     {Icon && <span className="contact-icon">{createElement(Icon, { "aria-hidden": true })}</span>}
-                    <span>
+                    <span className="contact-method-copy">
                       <small>{label}</small>
-                      <strong>{value}</strong>
+                      <strong className={copyable ? "contact-email-address" : undefined}>
+                        {copyable && value.includes("@")
+                          ? <>{value.slice(0, value.indexOf("@") + 1)}<wbr />{value.slice(value.indexOf("@") + 1)}</>
+                          : value}
+                      </strong>
                     </span>
                     <span className="contact-arrow" aria-hidden="true">↗</span>
                   </a>
-                  {copyable && (
-                    <button
-                      className="copy-email-button"
-                      type="button"
-                      onClick={handleCopyEmail}
-                      aria-label={copyStatus === "copied" ? portfolio.emailCopy.copied : portfolio.emailCopy.label}
-                    >
-                      <LuCopy aria-hidden="true" />
-                      <span>{copyStatus === "copied" ? portfolio.emailCopy.copied : portfolio.emailCopy.label}</span>
-                    </button>
-                  )}
-                </div>
-              ))}
+                );
+
+                if (!copyable) return <div className="contact-method-row" key={label}>{card}</div>;
+
+                return (
+                  <div className="contact-email-group" key={label}>
+                    {card}
+                    <div className="contact-actions">
+                      <button
+                        className="copy-email-button"
+                        type="button"
+                        onClick={handleCopyEmail}
+                        aria-label={copyStatus === "copied" ? portfolio.emailCopy.copied : portfolio.emailCopy.label}
+                      >
+                        <LuCopy aria-hidden="true" />
+                        <span>{copyStatus === "copied" ? portfolio.emailCopy.copied : portfolio.emailCopy.label}</span>
+                      </button>
+                      {portfolio.resume.enabled && (
+                        <a
+                          className="copy-email-button resume-contact-download"
+                          href={resumeHref}
+                          download={portfolio.resume.downloadName}
+                          aria-label="Download résumé (PDF)"
+                        >
+                          <LuDownload aria-hidden="true" />
+                          <span>Download résumé (PDF)</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <span className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">
               {copyStatus === "copied"
@@ -144,12 +168,6 @@ export default function ContactSection() {
                   ? portfolio.emailCopy.error
                   : ""}
             </span>
-            {portfolio.resume.enabled && (
-              <a className="button button-outline resume-download" href={portfolio.resume.path} download>
-                <LuDownload aria-hidden="true" />
-                {portfolio.resumeLabel}
-              </a>
-            )}
           </div>
 
           <div className="contact-form-wrap">

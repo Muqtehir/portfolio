@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { portfolio } from "./data/portfolio";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutSection from "./components/AboutSection";
@@ -10,7 +12,34 @@ import Footer from "./components/Footer";
 import GlobalEffects from "./components/GlobalEffects";
 import TechMarquee from "./components/TechMarquee";
 
+if (import.meta.env.DEV) {
+  import("./dev/layoutCheck.js").then(({ installLayoutCheck }) => installLayoutCheck());
+}
+
 function App() {
+  useEffect(() => {
+    if (!import.meta.env.DEV || !portfolio.resume.enabled) return undefined;
+
+    const controller = new AbortController();
+    fetch(portfolio.resume.path, { method: "HEAD", signal: controller.signal })
+      .then((response) => {
+        if (!response.ok || !response.headers.get("content-type")?.includes("application/pdf")) {
+          console.warn(
+            `[resume] file not found at ${portfolio.resume.path}. Add your PDF to /public`,
+          );
+        }
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          console.warn(
+            `[resume] file not found at ${portfolio.resume.path}. Add your PDF to /public`,
+          );
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <div className="portfolio-shell">
       <a className="skip-link" href="#main">Skip to content</a>

@@ -5,8 +5,13 @@ export const portfolio = {
   emailLink: "mailto:izzatudeenmuqtehir@gmail.com",
   availability: "Available for internships, junior developer roles and freelance projects.",
   heroAvailability: "Open to internships, junior developer roles and freelance projects.",
-  resume: { path: "/Muqtehir-Mayaleeke-Resume.pdf", enabled: false },
-  resumeLabel: "Download Résumé",
+  resume: {
+    enabled: true,
+    path: "/resume.pdf",
+    label: "Résumé",
+    downloadName: "Muqtehir-IZZATUDEEN-Full-Stack-Developer-Resume.pdf",
+    updated: "2026-10",
+  },
   emailCopy: {
     label: "Copy email",
     copied: "Copied",

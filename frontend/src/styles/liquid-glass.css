@@ -425,7 +425,8 @@
   }
 
   .navbar .nav-links,
-  .navbar .nav-cta {
+  .navbar .nav-cta,
+  .navbar .nav-resume {
     display: none;
   }
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { LuFileText } from "react-icons/lu";
 import { portfolio } from "../data/portfolio";
 import useActiveSection from "../hooks/useActiveSection";
 import LiquidGlass from "./LiquidGlass";
@@ -16,6 +17,7 @@ export default function Navbar() {
   const reduceMotion = useReducedMotion();
   const theme = useTheme();
   const { activeSection, navigateToSection } = useActiveSection(sectionIds);
+  const resumeHref = `${portfolio.resume.path}?v=${portfolio.resume.updated}`;
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -49,7 +51,7 @@ export default function Navbar() {
     <header className="site-header">
       <LiquidGlass
         as="nav"
-        className={`navbar page-shell${menuOpen ? " is-menu-open" : ""}`}
+        className={`navbar page-shell${menuOpen ? " is-menu-open" : ""}${portfolio.resume.enabled ? " has-resume" : ""}`}
         variant="nav"
         interactive
         aria-label="Main navigation"
@@ -101,6 +103,19 @@ export default function Navbar() {
         >
           <span aria-hidden="true">{menuOpen ? "×" : "☰"}</span>
         </button>
+        {portfolio.resume.enabled && (
+          <a
+            className="nav-resume"
+            href={resumeHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open résumé (PDF, opens in a new tab)"
+            data-tooltip="Open résumé (PDF, opens in a new tab)"
+          >
+            <LuFileText aria-hidden="true" />
+            <span className="nav-resume-label">{portfolio.resume.label}</span>
+          </a>
+        )}
         <LiquidGlass
           as="a"
           className="nav-cta"
@@ -142,6 +157,20 @@ export default function Navbar() {
                   {portfolio.navigation.hireMeLabel} <span aria-hidden="true">↗</span>
                 </span>
               </LiquidGlass>
+              {portfolio.resume.enabled && (
+                <a
+                  className="nav-mobile-resume"
+                  href={resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open résumé (PDF, opens in a new tab)"
+                  onClick={closeMenu}
+                >
+                  <LuFileText aria-hidden="true" />
+                  <span>{portfolio.resume.label}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              )}
               <ul className="nav-mobile-links">
                 {links.map(({ label, href }) => (
                   <li key={href}>

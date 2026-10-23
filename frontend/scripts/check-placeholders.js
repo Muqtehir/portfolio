@@ -75,6 +75,11 @@ function inspectJavaScript(node, file, keyPath = "") {
     return;
   }
 
+  if (node.type === "File") {
+    inspectJavaScript(node.program, file, keyPath);
+    return;
+  }
+
   if (node.type === "Program") {
     for (const statement of node.body) inspectJavaScript(statement, file);
     return;
